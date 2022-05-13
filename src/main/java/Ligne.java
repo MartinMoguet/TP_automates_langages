@@ -1,15 +1,20 @@
-import java.util.ArrayList;
+import java.util.List;
 
 public class Ligne {
     private String transport;
-    private String num_ligne;
-    private ArrayList <Station> listStation;
+    private Double num_ligne;
+    private List <Station> listStation;
 
-    public Ligne(String transport, String num_ligne, ArrayList <Station> listStation) { {
+    public Ligne(String transport, Double num_ligne, List<Station> stations) { {
         this.transport = transport;
         this.num_ligne = num_ligne;
-        this.listStation = listStation;
+        this.listStation = stations;
     }
-    }}
+    }
+    @Override
+    public String toString() {
+        return "[" + transport + ", " + num_ligne + ", "+ listStation + "]";
+    }
+}
 
 
