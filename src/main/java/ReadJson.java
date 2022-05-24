@@ -19,7 +19,7 @@ public class ReadJson {
         //JSON parser object to parse read file
         JSONParser jsonParser = new JSONParser();
 
-        try (FileReader reader = new FileReader("C:\\Users\\Basile\\IdeaProjects\\tpAutomateMaven\\src\\main\\resources\\bus.json")) {
+        try (FileReader reader = new FileReader("/Users/martinmoguet/Desktop/Cours/FISA 3/Automate et langage/TP_Automates_et_languages/bdd/bus.json")) {
             //Read JSON file
             Object obj = jsonParser.parse(reader);
             JSONObject busList = (JSONObject) obj;
