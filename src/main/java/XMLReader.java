@@ -16,7 +16,7 @@ public class XMLReader {
         Double num_ligne = (double) 0 ;              
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
-        Document document = builder.parse(new File("C:/Users/Pauline/Documents/INSA3/Automates et langages/TP_automates_langages/bdd/train.xml"));
+        Document document = builder.parse(new File("bdd/train.xml"));
         List<Ligne> lignes = new ArrayList<>();
         List<Station> stations = new ArrayList<>();
         List<Itinéraire> itineraires = new ArrayList<>();
