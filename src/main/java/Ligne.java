@@ -13,7 +13,7 @@ public class Ligne {
     }
     @Override
     public String toString() {
-        return "[" + transport + ", " + num_ligne + ", "+ listStation + "]";
+        return transport + ", Ligne n°" + num_ligne + ", Stations desservies "+ listStation ;
     }
 }
 
