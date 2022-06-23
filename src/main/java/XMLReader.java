@@ -27,8 +27,8 @@ public class XMLReader {
                 Element elem = (Element) node;
                 String station_depart =  elem.getElementsByTagName("start-station").item(0).getChildNodes().item(0).getNodeValue();
                 String station_arrivee =  elem.getElementsByTagName("arrival-station").item(0).getChildNodes().item(0).getNodeValue();
-                Double horaire_depart = Double.parseDouble(elem.getElementsByTagName("start-hour").item(0).getChildNodes().item(0).getNodeValue());
-                Double horaire_arrivee = Double.parseDouble(elem.getElementsByTagName("arrival-hour").item(0).getChildNodes().item(0).getNodeValue());
+                String horaire_depart = elem.getElementsByTagName("start-hour").item(0).getTextContent();
+                String horaire_arrivee =  elem.getElementsByTagName("arrival-hour").item(0).getTextContent();
                 //Double num_ligne = Double.parseDouble(elem.getElementsByTagName("line").item(0).getChildNodes().item(1).getNodeValue());
                 num_ligne = num_ligne + 1 ;
                 
@@ -36,12 +36,22 @@ public class XMLReader {
                 Station arrivee;
                 depart = new Station(station_depart);
                 arrivee= new Station(station_arrivee);
+                /*
+                for(Station stat: stations) {
+                    if (stat.nom != depart.nom){
+                        stations.add(depart); 
+                    }
+                    if (stat.nom != arrivee.nom) {
+                        stations.add(arrivee);
+                    }
+                }*/
                 stations.add(depart);
-                stations.add(new Station(station_arrivee));
-                lignes.add(new Ligne("train", num_ligne, stations));
+                stations.add(arrivee);
+                lignes.add(new Ligne("train", num_ligne, stations, itineraires));
                 itineraires.add(new Itinéraire(depart, arrivee, horaire_depart, horaire_arrivee));
             }
         }
+        
         for (Ligne lign: lignes)
             System.out.println(lign.toString());
         for (Station stat : stations) System.out.println(stat.toString());
