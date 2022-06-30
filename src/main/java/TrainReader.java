@@ -12,10 +12,10 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class TrainReader {
-    public static void main(String[] args) throws ParserConfigurationException, SAXException 
+    public static List<Itinéraire> trainReader(String path) throws ParserConfigurationException, SAXException 
     { 
         try {
-            File file = new File("bdd/train.xml");
+            File file = new File(path);
             List<Itinéraire> itineraires = new ArrayList<>();
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
@@ -38,10 +38,11 @@ public class TrainReader {
                     itineraires.add(new Itinéraire(depart, arrivee, horaire_depart, horaire_arrivee));
                 }
             }
-            for (Itinéraire itin : itineraires) System.out.println(itin.toString());
+            return itineraires ;
         }
         catch(IOException e) {
             System.out.println(e);
         }
+        return null;
     }
 }
