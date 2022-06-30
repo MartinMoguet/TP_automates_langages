@@ -9,42 +9,6 @@ import org.json.simple.parser.*;
 
 public class BusReader {
     public static void main(String[] args) throws Exception {
-        /*JSONArray a = (JSONArray) .parse(new FileReader("c:\\exer4-courses.json"));
-
-        for (Object o : a)
-        {
-          JSONObject person = (JSONObject) o;
-      
-          String name = (String) person.get("name");
-          System.out.println(name);
-      
-          String city = (String) person.get("city");
-          System.out.println(city);
-      
-          String job = (String) person.get("job");
-          System.out.println(job);
-      
-          JSONArray cars = (JSONArray) person.get("cars");
-      
-          for (Object c : cars)
-          {
-            System.out.println(c+"");
-          }
-        }
-       
-       
-        / // parsing file "JSONExample.json"
-        Object ob = new JSONParser().parse(new FileReader("bdd/bus.json"));
-
-        // typecasting ob to JSONObject
-        JSONObject js = (JSONObject) ob;
-
-        String firstName = (String) js.get("station");
-        //String lastName = (String) js.get("lastName");
-
-        System.out.println("First name is: " + firstName);
-        //System.out.println("Last name is: " +lastName);*/
-
 
         ArrayList<Station> stations = new ArrayList<>();
         ArrayList<Itinéraire> itineraires = new ArrayList<>();
@@ -62,12 +26,24 @@ public class BusReader {
                 stations.clear();
 
                 for (JSONObject station : (Iterable<JSONObject>) stationsJson){
-                    stations.add(new Station(station.get("station").toString()));
+                  String s = station.get("station").toString();
+                  try {
+                    s.matches("[a-zA-Z]");
+                  }catch(Exception e){
+                    System.out.println("Le nom des stations ne doit être composé que de lettres");
+                  }
+                  stations.add(new Station(s));
                 }
 
                 // Récupération des heures de passages
                 JSONArray passages = (JSONArray) horaire.get("passages");
                 for (JSONArray passage : (Iterable<JSONArray>) passages){
+                  String p = String.valueOf(passage);
+                  try {
+                    p.matches("\"[0-2][0-9][0-5][0-9]\",|\"[0-2][0-9][0-5][0-9]\"],$");
+                  }catch(Exception e){
+                    System.out.println("Ce n'est pas un format d'heure valide");
+                  }
                     for (String heure : (Iterable<String>) passage){
                         if(passage.indexOf(heure) < passage.size() - 1) {
                             Station stationDepart = stations.get(passage.indexOf(heure));

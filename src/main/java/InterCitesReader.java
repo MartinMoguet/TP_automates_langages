@@ -6,7 +6,7 @@ import java.util.Scanner; // Import the Scanner class to read text files
 import java.util.regex.Pattern;
 
 public class InterCitesReader {
-    /*public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException {
         
         Boolean hours = false;
         ArrayList<Itinéraire> itineraires = new ArrayList<>();
@@ -19,10 +19,15 @@ public class InterCitesReader {
         Scanner sc = new Scanner(file);
         while (sc.hasNextLine()) {
             String line = sc.nextLine();
-            if (Pattern.matches("//.*", line)) {
+            if (Pattern.matches("//", line)) {
                 hours = true;
             } else if (!Pattern.matches("%.*", line)) {
                 if (hours) {
+                    try {
+                        line.matches("^[a-zA-Z]* [\t][a-zA-Z]* [\t][0-2][0-9][0-5][0-9]$");
+                      }catch(Exception e){
+                        System.out.println("Ce n'est pas le bon format, on attends : NomStation  NomStation  HeureDepart");
+                      }
                     String[] elem = line.split("[ \t]+");
                     stationDepart = new Station(elem[0]);
                     stationArrivee = new Station(elem[1]);
@@ -35,6 +40,11 @@ public class InterCitesReader {
                         }
                     }
                 } else {
+                    try {
+                        line.matches("^[a-zA-Z]*[\t][a-zA-Z]*[\t][0-5][0-9]$");
+                      }catch(Exception e){
+                        System.out.println("Ce n'est pas le bon format, on attends : NomStation  NomStation  DureeTrajet");
+                      }
                     String[] elem = line.split("[ \t]+");
                     stationDepart = new Station(elem[0]);
                     stationArrivee = new Station(elem[1]);
@@ -57,5 +67,5 @@ public class InterCitesReader {
         int min = (m + minute) % 60;
         int heure = (h + (m + minute) / 60) % 24;
         return String.format("%02d%02d", heure, min);
-    }*/
+    }
 }
