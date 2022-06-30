@@ -8,12 +8,12 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.*;
 
 public class BusReader {
-    public static void main(String[] args) throws Exception {
+    public static ArrayList<Itinéraire> busReader(String path) throws Exception {
 
         ArrayList<Station> stations = new ArrayList<>();
         ArrayList<Itinéraire> itineraires = new ArrayList<>();
        
-        try (Reader reader = new FileReader("bdd/bus.json")) {
+        try (Reader reader = new FileReader(path)) {
             JSONParser parser = new JSONParser();
             JSONObject jsonObject = (JSONObject) parser.parse(reader);
 
@@ -57,7 +57,7 @@ public class BusReader {
                     }
                 }
             }
-        System.out.println(itineraires);
+        return itineraires;
     }
     }
 }
